@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Семён Сарапулов — Эксперт по агентским сетям в недвижимости</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0A0A0C;
+            --bg-secondary: #111114;
+            --bg-card: #16161A;
+            --accent: #C8A96E;
+            --accent-light: #E0C992;
+            --text-primary: #F0EDE6;
+            --text-secondary: #9A978F;
+            --text-muted: #5A584F;
+            --border: rgba(200, 169, 110, 0.15);
+            --border-hover: rgba(200, 169, 110, 0.4);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { font-family: 'Manrope', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.7; overflow-x: hidden; }
+
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: rgba(10,10,12,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); transition: all 0.4s ease; }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--accent); letter-spacing: 0.05em; text-decoration: none; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--accent); }
+
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 3rem 4rem; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 80vw; height: 80vw; background: radial-gradient(circle, rgba(200,169,110,0.04) 0%, transparent 60%); pointer-events: none; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; max-width: 1300px; margin: 0 auto; width: 100%; align-items: center; }
+        .hero-content { animation: fadeInUp 1s ease-out; }
+        .hero-label { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--border); padding: 0.5rem 1.2rem; margin-bottom: 2rem; background: rgba(200,169,110,0.05); }
+        .hero-name { font-family: 'Cormorant Garamond', serif; font-size: 4.2rem; font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; }
+        .hero-name span { display: block; color: var(--accent); }
+        .hero-tagline { font-size: 1.15rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 2.5rem; max-width: 520px; font-weight: 300; }
+        .hero-tagline strong { color: var(--text-primary); font-weight: 500; }
+        .hero-stats { display: flex; gap: 3rem; margin-bottom: 2.5rem; }
+        .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 700; color: var(--accent); line-height: 1; }
+        .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.4rem; }
+        .hero-photo-wrapper { position: relative; animation: fadeInRight 1s ease-out 0.3s both; }
+        .hero-photo { width: 100%; max-width: 480px; aspect-ratio: 3/4; object-fit: cover; object-position: center top; filter: grayscale(20%) contrast(1.05); border: 1px solid var(--border); transition: filter 0.5s ease; }
+        .hero-photo:hover { filter: grayscale(0%) contrast(1.05); }
+        .hero-photo-accent { position: absolute; top: -20px; right: -20px; width: 100%; height: 100%; border: 1px solid var(--accent); opacity: 0.3; z-index: -1; }
+        .cta-button { display: inline-flex; align-items: center; gap: 0.7rem; padding: 1rem 2rem; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-primary); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: all 0.3s ease; }
+        .cta-button:hover { border-color: var(--accent); background: rgba(200,169,110,0.08); transform: translateY(-2px); }
+        .cta-button svg { width: 18px; height: 18px; fill: var(--accent); }
+
+        section { padding: 7rem 3rem; max-width: 1300px; margin: 0 auto; }
+        .section-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem; }
+        .section-subtitle { font-size: 1.05rem; color: var(--text-secondary); max-width: 650px; font-weight: 300; line-height: 1.8; margin-bottom: 3.5rem; }
+        .divider { width: 100%; height: 1px; background: var(--border); max-width: 1300px; margin: 0 auto; }
+
+        .value-section { background: var(--bg-secondary); padding: 7rem 3rem; max-width: 100%; }
+        .value-section .inner { max-width: 1300px; margin: 0 auto; }
+        .value-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .value-card { background: var(--bg-card); border: 1px solid var(--border); padding: 2.5rem; transition: border-color 0.3s ease, transform 0.3s ease; }
+        .value-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+        .value-icon { width: 56px; height: 56px; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); background: rgba(200,169,110,0.05); }
+        .value-icon svg { width: 28px; height: 28px; }
+        .value-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; color: var(--accent-light); }
+        .value-card-text { color: var(--text-secondary); font-weight: 300; line-height: 1.8; font-size: 0.92rem; }
+
+        .cases-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .case-card { background: var(--bg-card); border: 1px solid var(--border); padding: 2.5rem; position: relative; overflow: hidden; transition: border-color 0.4s ease, transform 0.3s ease; }
+        .case-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+        .case-card.featured { grid-column: 1 / -1; padding: 0; }
+        .featured-top { width: 100%; height: 280px; overflow: hidden; position: relative; }
+        .featured-top img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7) contrast(1.1); }
+        .featured-top::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(transparent, var(--bg-card)); }
+        .featured-content { padding: 2.5rem 3rem 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+        .case-logo-wrapper { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem; }
+        .case-logo-small { width: 48px; height: 48px; object-fit: contain; border: 1px solid var(--border); padding: 6px; background: white; border-radius: 4px; }
+        .case-period { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+        .case-name { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .case-role { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 500; }
+        .case-description { color: var(--text-secondary); font-weight: 300; line-height: 1.8; margin-bottom: 2rem; font-size: 0.92rem; }
+        .case-metrics { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+        .metric-value { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 700; color: var(--accent); line-height: 1.1; }
+        .metric-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.3rem; }
+        .case-exit { display: inline-block; background: rgba(200,169,110,0.1); border: 1px solid var(--border); padding: 0.4rem 1rem; font-size: 0.78rem; color: var(--accent); font-weight: 600; letter-spacing: 0.05em; margin-top: 1rem; }
+
+        .media-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .media-item { background: var(--bg-card); border: 1px solid var(--border); padding: 2rem; transition: border-color 0.3s ease, transform 0.3s ease; text-decoration: none; color: inherit; display: block; }
+        .media-item:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+        .media-type { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+        .media-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; margin-bottom: 0.6rem; line-height: 1.3; }
+        .media-source { font-size: 0.78rem; color: var(--text-muted); font-weight: 500; }
+
+        .personality-section { background: var(--bg-secondary); padding: 5rem 3rem; max-width: 100%; }
+        .personality-section .inner { max-width: 1300px; margin: 0 auto; }
+        .personality-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .personality-card { background: var(--bg-card); border: 1px solid var(--border); padding: 1.8rem; text-align: center; }
+        .personality-card-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.6rem; }
+        .personality-card-value { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem; }
+        .personality-card-desc { font-size: 0.78rem; color: var(--text-secondary); font-weight: 300; }
+        .tags-row { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .tag { background: rgba(200,169,110,0.08); border: 1px solid var(--border); padding: 0.4rem 1rem; font-size: 0.78rem; color: var(--text-secondary); }
+
+        .credentials-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+        .credential-block h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--accent-light); margin-bottom: 1.2rem; }
+        .credential-item { padding: 0.8rem 0; border-bottom: 1px solid rgba(200,169,110,0.08); font-size: 0.88rem; color: var(--text-secondary); font-weight: 300; }
+        .credential-item:last-child { border-bottom: none; }
+        .credential-item strong { color: var(--text-primary); font-weight: 500; display: block; }
+
+        .personal-block { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; margin-top: 3rem; padding-top: 3rem; border-top: 1px solid var(--border); }
+        .personal-text { color: var(--text-secondary); font-weight: 300; line-height: 1.9; font-size: 0.95rem; font-style: italic; }
+        .personal-details { display: flex; flex-direction: column; gap: 1rem; }
+        .personal-detail { font-size: 0.85rem; color: var(--text-secondary); }
+        .personal-detail span { color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 0.2rem; }
+
+        .contact-section { padding: 7rem 3rem 5rem; text-align: center; max-width: 1300px; margin: 0 auto; }
+        .contact-title { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; margin-bottom: 1rem; }
+        .contact-subtitle { font-size: 1.05rem; color: var(--text-secondary); font-weight: 300; margin-bottom: 3rem; max-width: 550px; margin-left: auto; margin-right: auto; }
+        .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+        .contact-link { display: flex; align-items: center; gap: 0.7rem; padding: 1rem 2rem; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-primary); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: all 0.3s ease; }
+        .contact-link:hover { border-color: var(--accent); background: rgba(200,169,110,0.08); transform: translateY(-2px); }
+        .contact-link svg { width: 18px; height: 18px; fill: var(--accent); }
+
+        footer { padding: 2rem 3rem; border-top: 1px solid var(--border); text-align: center; font-size: 0.75rem; color: var(--text-muted); }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 1024px) {
+            .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .hero-name { font-size: 3.2rem; }
+            .cases-grid { grid-template-columns: 1fr; }
+            .featured-content { grid-template-columns: 1fr; }
+            .media-grid { grid-template-columns: 1fr 1fr; }
+            .credentials-grid { grid-template-columns: 1fr; }
+            .personality-grid { grid-template-columns: 1fr 1fr; }
+            .personal-block { grid-template-columns: 1fr; }
+            .value-cards { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { gap: 1.2rem; }
+            .nav-links a { font-size: 0.7rem; }
+            .hero { padding: 6rem 1.5rem 3rem; }
+            .hero-name { font-size: 2.4rem; }
+            .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+            .stat-number { font-size: 2rem; }
+            section { padding: 4rem 1.5rem; }
+            .section-title { font-size: 2rem; }
+            .media-grid { grid-template-columns: 1fr; }
+            .contact-links { flex-direction: column; align-items: center; }
+            .personality-grid { grid-template-columns: 1fr; }
+            .value-section, .personality-section { padding: 4rem 1.5rem; }
+            .featured-content { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#" class="nav-logo">Семён Сарапулов</a>
+    <ul class="nav-links">
+        <li><a href="#about">Обо мне</a></li>
+        <li><a href="#cases">Кейсы</a></li>
+        <li><a href="#media">СМИ</a></li>
+        <li><a href="#contact">Связь</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-grid">
+        <div class="hero-content">
+            <div class="hero-label">Эксперт по агентским сетям в недвижимости</div>
+            <h1 class="hero-name">Семён<span>Сарапулов</span></h1>
+            <p class="hero-tagline">Дважды создал крупнейшие агентские сети в&nbsp;сфере недвижимости. Обе были приобретены <strong>ГК&nbsp;«Самолёт»</strong> и&nbsp;объединены в&nbsp;<strong>Самолёт&nbsp;Плюс</strong> — компанию с&nbsp;оценкой&nbsp;<strong>21,2&nbsp;млрд&nbsp;₽</strong>.</p>
+            <div class="hero-stats">
+                <div class="stat"><div class="stat-number">456+</div><div class="stat-label">Офисов в сети</div></div>
+                <div class="stat"><div class="stat-number">110 млрд</div><div class="stat-label">Оборот продаж ₽/год</div></div>
+                <div class="stat"><div class="stat-number">2</div><div class="stat-label">Успешных экзита</div></div>
+            </div>
+            <a href="https://t.me/frguru" target="_blank" class="cta-button">
+                <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                Обсудить сотрудничество
+            </a>
+        </div>
+        <div class="hero-photo-wrapper">
+            <img src="DSC07638.jpg" alt="Семён Сарапулов" class="hero-photo">
+            <div class="hero-photo-accent"></div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VALUE PROPOSITION -->
+<div class="value-section" id="about">
+    <div class="inner reveal">
+        <div class="section-label">Ценность</div>
+        <div class="section-title">Что я могу сделать для&nbsp;застройщика</div>
+        <div class="section-subtitle">Построить собственную агентскую сеть прямых продаж дешевле, чем купить готовую. И перевести постоянные издержки на маркетинг в переменные.</div>
+        <div class="value-cards">
+            <div class="value-card">
+                <div class="value-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#C8A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </div>
+                <div class="value-card-title">Создание агентской сети с&nbsp;нуля</div>
+                <div class="value-card-text">Полный цикл: от&nbsp;разработки бизнес-модели и&nbsp;франчайзингового предложения до&nbsp;упаковки, маркетинга, продажи и&nbsp;сопровождения партнёров. Дважды прошёл этот путь — от&nbsp;первого офиса до&nbsp;сотен точек по&nbsp;России и&nbsp;СНГ.</div>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#C8A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="M7 10l3 3 7-7"/></svg>
+                </div>
+                <div class="value-card-title">Экспертиза на стыке продаж и&nbsp;технологий</div>
+                <div class="value-card-text">Разработал IT-продукт по&nbsp;управлению агентской сетью через&nbsp;Telegram. Резидентство Сколково. Понимаю, как автоматизировать процессы и&nbsp;масштабировать без&nbsp;потери качества.</div>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#C8A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div class="value-card-title">Глубокое знание агентского рынка</div>
+                <div class="value-card-text">13+ лет в&nbsp;сфере франчайзинга и&nbsp;недвижимости. Знаю, как работают агенты, что их&nbsp;мотивирует, как выстроить систему лояльности и&nbsp;контроля. Автор двух книг и&nbsp;основатель крупнейшего профессионального сообщества.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CASES -->
+<section id="cases">
+    <div class="reveal">
+        <div class="section-label">Ключевые кейсы</div>
+        <div class="section-title">Проекты, которые изменили рынок</div>
+        <div class="section-subtitle">Оба проекта были приобретены ГК «Самолёт» и стали основой для Самолёт Плюс — крупнейшей агентской платформы в России.</div>
+    </div>
+    <div class="cases-grid">
+        <!-- ZOLTOR -->
+        <div class="case-card featured reveal">
+            <div class="featured-top"><img src="vkadre_sochi-57.jpg" alt="Команда Zoltor — награждение"></div>
+            <div class="featured-content">
+                <div>
+                    <div class="case-period">2019 — 2023 · Основатель / CEO</div>
+                    <div class="case-name">ZOLTOR</div>
+                    <div class="case-role">Агентская сеть в сфере недвижимости</div>
+                    <div class="case-description">Создал компанию с нуля. За 2 года — крупнейшая сеть по количеству офисов. Разработали IT-платформу управления бизнесом. Резидентство Сколково. О сделке с ГК «Самолёт» написали Forbes, Коммерсантъ и РБК.</div>
+                    <div class="case-exit">→ EXIT: продажа ГК «Самолёт», май 2023</div>
+                </div>
+                <div>
+                    <div class="case-metrics">
+                        <div class="metric"><div class="metric-value">356</div><div class="metric-label">Франшиз за 3 года</div></div>
+                        <div class="metric"><div class="metric-value">4</div><div class="metric-label">Страны присутствия</div></div>
+                        <div class="metric"><div class="metric-value">21,2 млрд ₽</div><div class="metric-label">Оценка на preIPO</div></div>
+                        <div class="metric"><div class="metric-value">825 млн ₽</div><div class="metric-label">Привлечено на preIPO</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Перспектива 24 -->
+        <div class="case-card reveal">
+            <div class="case-logo-wrapper">
+                <img src="KsuNb16DA3o.jpg" alt="Перспектива 24" class="case-logo-small">
+                <div><div class="case-name" style="font-size:1.6rem;margin-bottom:0;">Перспектива 24</div></div>
+            </div>
+            <div class="case-period">2017 — 2019 · Директор по франчайзингу</div>
+            <div class="case-role">Оператор недвижимости</div>
+            <div class="case-description">Провёл полный ребрендинг. Создал франшизу с&nbsp;нуля: от&nbsp;концепции и&nbsp;УТП до&nbsp;маркетинга и&nbsp;системы продаж. Довёл сеть до&nbsp;100&nbsp;офисов.</div>
+            <div class="case-metrics">
+                <div class="metric"><div class="metric-value">100</div><div class="metric-label">Офисов в сети</div></div>
+                <div class="metric"><div class="metric-value">54 млрд ₽</div><div class="metric-label">Оборот сети / год</div></div>
+            </div>
+            <div class="case-exit">→ EXIT: продажа за 1,4 млрд ₽</div>
+        </div>
+        <!-- ВВК -->
+        <div class="case-card reveal">
+            <div class="case-logo-wrapper">
+                <img src="Frame_309.png" alt="ВВК" class="case-logo-small">
+                <div><div class="case-name" style="font-size:1.6rem;margin-bottom:0;">ВВК</div></div>
+            </div>
+            <div class="case-period">2014 — 2017 · Руководитель франчайзинга</div>
+            <div class="case-role">Военно-Врачебная Коллегия</div>
+            <div class="case-description">Масштабировал федеральную сеть с&nbsp;нуля, выстроил систему франчайзинга и&nbsp;управления партнёрами.</div>
+            <div class="case-metrics">
+                <div class="metric"><div class="metric-value">1 → 65</div><div class="metric-label">Точек по России</div></div>
+            </div>
+        </div>
+        <!-- Франчайзинг по-русски -->
+        <div class="case-card reveal" style="grid-column: 1 / -1;">
+            <div class="case-period">Настоящее время · Основатель</div>
+            <div class="case-name">Франчайзинг по-русски</div>
+            <div class="case-role">Крупнейшее профессиональное сообщество в сфере франчайзинга</div>
+            <div class="case-description">Объединяет предпринимателей, франчайзоров и&nbsp;экспертов отрасли. Автор одноимённой книги, ставшей настольным пособием для тех, кто строит франчайзинговый бизнес в&nbsp;России.</div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MEDIA -->
+<section id="media">
+    <div class="reveal">
+        <div class="section-label">СМИ и публикации</div>
+        <div class="section-title">Книги, интервью, статьи</div>
+        <div class="section-subtitle">Автор двух книг о франчайзинге и предпринимательстве. Публикации в ведущих деловых СМИ.</div>
+    </div>
+    <div class="media-grid">
+        <a href="https://www.ozon.ru/product/franchayzing-po-russki-182694710/" target="_blank" class="media-item reveal">
+            <div class="media-type">📕 Книга</div>
+            <div class="media-title">Франчайзинг по-русски</div>
+            <div class="media-source">Ozon</div>
+        </a>
+        <a href="#" class="media-item reveal">
+            <div class="media-type">📕 Книга</div>
+            <div class="media-title">ZOLTOR: как запустить стартап, потерять 22,5 млн руб. и выжить</div>
+            <div class="media-source">Книга</div>
+        </a>
+        <a href="https://www.kommersant.ru/doc/6001369" target="_blank" class="media-item reveal">
+            <div class="media-type">📰 Пресса</div>
+            <div class="media-title">Покупка Zoltor группой «Самолёт»</div>
+            <div class="media-source">Коммерсантъ</div>
+        </a>
+        <a href="https://www.kommersant.ru/doc/5099708" target="_blank" class="media-item reveal">
+            <div class="media-type">📰 Пресса</div>
+            <div class="media-title">Продажа «Перспективы 24»</div>
+            <div class="media-source">Коммерсантъ</div>
+        </a>
+        <a href="https://rg.ru/authors/Semen-Sarapulov" target="_blank" class="media-item reveal">
+            <div class="media-type">✍️ Колонки</div>
+            <div class="media-title">Авторские статьи</div>
+            <div class="media-source">Российская газета</div>
+        </a>
+        <a href="https://vc.ru/life/256328" target="_blank" class="media-item reveal">
+            <div class="media-type">📝 Статья</div>
+            <div class="media-title">7 историй бизнеса, запустившихся в пандемию</div>
+            <div class="media-source">VC.ru</div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=x-w7zYGvxdU" target="_blank" class="media-item reveal">
+            <div class="media-type">🎥 Видео</div>
+            <div class="media-title">Интервью: бизнес и франчайзинг</div>
+            <div class="media-source">YouTube</div>
+        </a>
+        <a href="https://businesstory.ru/rol-osnovatelja-i-rol-seo-v-sovremennom-biznese/" target="_blank" class="media-item reveal">
+            <div class="media-type">🎙️ Подкаст</div>
+            <div class="media-title">Роль основателя и роль CEO в бизнесе</div>
+            <div class="media-source">Businesstory</div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=w0ff7dUd4ow" target="_blank" class="media-item reveal">
+            <div class="media-type">🎥 Видео</div>
+            <div class="media-title">Выступление и интервью</div>
+            <div class="media-source">YouTube</div>
+        </a>
+    </div>
+</section>
+
+<!-- PERSONALITY -->
+<div class="personality-section">
+    <div class="inner reveal">
+        <div class="section-label">Профиль личности</div>
+        <div class="section-title">Как я мыслю и действую</div>
+        <div class="section-subtitle">Результаты международных сертифицированных тестов — MBTI, CliftonStrengths (Gallup), PCM.</div>
+        <div class="personality-grid">
+            <div class="personality-card">
+                <div class="personality-card-label">MBTI</div>
+                <div class="personality-card-value">ENTP</div>
+                <div class="personality-card-desc">Новатор, стратег,<br>предприниматель</div>
+            </div>
+            <div class="personality-card">
+                <div class="personality-card-label">CliftonStrengths #1</div>
+                <div class="personality-card-value">Strategic</div>
+                <div class="personality-card-desc">Вижу паттерны и<br>нахожу лучший путь</div>
+            </div>
+            <div class="personality-card">
+                <div class="personality-card-label">Gallup домен</div>
+                <div class="personality-card-value">Influencing</div>
+                <div class="personality-card-desc">Лидерство через<br>влияние и убеждение</div>
+            </div>
+            <div class="personality-card">
+                <div class="personality-card-label">PCM</div>
+                <div class="personality-card-value">Бунтарь</div>
+                <div class="personality-card-desc">Энергия действия,<br>креативность, драйв</div>
+            </div>
+        </div>
+        <div class="tags-row">
+            <span class="tag">Strategic</span><span class="tag">Activator</span><span class="tag">Significance</span><span class="tag">Futuristic</span><span class="tag">Competition</span><span class="tag">Positivity</span><span class="tag">Achiever</span><span class="tag">Communication</span><span class="tag">Arranger</span><span class="tag">Maximizer</span>
+        </div>
+    </div>
+</div>
+
+<!-- CREDENTIALS -->
+<section>
+    <div class="reveal">
+        <div class="section-label">Образование и признание</div>
+        <div class="section-title">Квалификация</div>
+    </div>
+    <div class="credentials-grid reveal">
+        <div class="credential-block">
+            <h3>Образование</h3>
+            <div class="credential-item"><strong>УГНТУ</strong>Институт Экономики. Экономика и управление в строительстве</div>
+            <div class="credential-item"><strong>МШУ «Сколково»</strong>Стартап Академия · Тандемократия · reSTART</div>
+            <div class="credential-item"><strong>Next MBA</strong>Директор по маркетингу</div>
+        </div>
+        <div class="credential-block">
+            <h3>Награды</h3>
+            <div class="credential-item"><strong>Лучший стартап</strong>в сфере недвижимости (МЖК)</div>
+            <div class="credential-item"><strong>Лучшая франшиза</strong>в сфере недвижимости (МЖК)</div>
+            <div class="credential-item"><strong>ТОП-3 сетей АН</strong>по версии Сбербанка</div>
+            <div class="credential-item"><strong>Резидент Сколково</strong>Инновационный центр</div>
+        </div>
+        <div class="credential-block">
+            <h3>Спикерство</h3>
+            <div class="credential-item"><strong>МШУ «Сколково»</strong>Студент и спикер</div>
+            <div class="credential-item"><strong>Международный Жилищный Конгресс</strong>Многократный спикер</div>
+            <div class="credential-item"><strong>Языки</strong>Русский · Английский (B2)</div>
+        </div>
+    </div>
+    <div class="personal-block reveal">
+        <div class="personal-text">«Я стратег по натуре — вижу, как работает рынок, нахожу в&nbsp;нём возможности, которые другие не&nbsp;замечают, и&nbsp;умею ими воспользоваться. Мой подход — не&nbsp;теория, а&nbsp;практика: два успешных экзита в&nbsp;одну и&nbsp;ту&nbsp;же компанию говорят сами за&nbsp;себя. Сейчас я&nbsp;готов применить этот опыт для создания агентской сети прямых продаж для крупного застройщика.»</div>
+        <div class="personal-details">
+            <div class="personal-detail"><span>Семья</span>Женат, дочь Аврора</div>
+            <div class="personal-detail"><span>Образ жизни</span>ЗОЖ, теннис, велоспорт, барабаны</div>
+            <div class="personal-detail"><span>Telegram-канал</span><a href="https://t.me/frguru" style="color: var(--accent); text-decoration: none;">@frguru</a></div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+    <div class="reveal">
+        <div class="section-label">Контакты</div>
+        <img src="avatar.jpg" alt="Семён Сарапулов" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:center top;border:2px solid var(--accent);margin-bottom:1.5rem;">
+        <div class="contact-title">Давайте обсудим</div>
+        <div class="contact-subtitle">Открыт к предложениям о сотрудничестве в качестве директора по развитию агентской сети</div>
+        <div class="contact-links">
+            <a href="https://t.me/frguru" target="_blank" class="contact-link">
+                <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                Telegram
+            </a>
+            <a href="tel:+79656597139" class="contact-link">
+                <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                +7 (965) 659-71-39
+            </a>
+            <a href="mailto:sarapylov@ya.ru" class="contact-link">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                sarapylov@ya.ru
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>© 2026 Семён Сарапулов. Все права защищены.</footer>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    window.addEventListener('scroll', () => {
+        document.querySelector('nav').style.padding = window.scrollY > 50 ? '0.8rem 3rem' : '1.2rem 3rem';
+    });
+</script>
+
+</body>
+</html>
